@@ -10,7 +10,7 @@
 ##' input = createCountPhe()
 ##' dds = DEseqObj(input[[1]],input[[2]],refLevel="untreated")
 ##' }
-##' @importFrom DESeq2 DESeqDataSetFromMatrix DESeq
+##' @importFrom DESeq2 DESeqDataSetFromMatrix DESeq counts
 ##' @importFrom stats relevel as.formula
 ##' @export
 ##'
