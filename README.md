@@ -18,5 +18,7 @@ DESeqResVolcano = function(DEGres,groupNum=1,outputDir=".",foldChange=1,adjPvalu
 
 增加差异的列向量。
 
+DEseqObj = function(countData,colData,groupNum=1,refLevel="control") ， 添加检测函数，如果colData不是dataframe的话，后面取列名会报错。
+
 
 

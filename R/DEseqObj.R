@@ -19,8 +19,11 @@ DEseqObj = function(countData,colData,groupNum=1,refLevel="control"){
   if(all(rownames(colData) == colnames(countData))){
     print("The id order between gene count file and phenotype file is identical without modification!")
   } else {
-    countData <- countData[, rownames(colData)]
+    ids = intersect(colnames(countData),rownames(colData))
+    countData <- countData[, ids]
+    colData <- colData[ids,,drop=F]
     print(paste0("After modifying, the id order between gene count file and phenotype file is ",all(rownames(colData) == colnames(countData))))
+    print(paste0("And ",length(ids)," individuals existed in both countData and colData are kept for analysis"))
   }
 
   # analysis and plot
