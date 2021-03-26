@@ -14,8 +14,11 @@
 ##' @importFrom stats relevel as.formula
 ##' @export
 ##'
+
+
 DEseqObj = function(countData,colData,groupNum=1,refLevel="control"){
   #countData=input[[1]];colData=input[[2]];groupNum=1
+  if(!is.data.frame(colData)) stop("colData is not a data frame")
   if(all(rownames(colData) == colnames(countData))){
     print("The id order between gene count file and phenotype file is identical without modification!")
   } else {

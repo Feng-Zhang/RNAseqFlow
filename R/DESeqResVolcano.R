@@ -18,9 +18,8 @@
 ##' @export
 ##'
 
-DESeqResVolcano = function(DEGres,groupNum=1,outputDir=".",foldChange=1,adjPvalue=0.05){
+DESeqResVolcano = function(DEGres,groupName="Group",outputDir=".",foldChange=1,adjPvalue=0.05){
   #DEGres=res
-  groupName = colnames(colData)[groupNum]
   DEGres$regulate <- factor(DEGres$regulate,levels=c("Up","Down","Normal"))
   p <- ggplot(data = as.data.frame(DEGres),
               aes(x = log2FoldChange,
