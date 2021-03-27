@@ -7,7 +7,7 @@
 ##' @param baseName the prefix name of outputs would be saved
 ##' @return NULL
 ##' @importFrom stringr str_split_fixed
-##' @importFrom clusterProfiler bitr
+##' @importFrom clusterProfiler bitr enrichGO
 ##' @importFrom utils write.csv
 ##' @importFrom grDevices pdf png dev.off
 ##' @importFrom graphics barplot

@@ -10,7 +10,7 @@
 ##'
 
 GSEAgo = function(geneChangeList,db="org.Hs.eg.db",outputDir=".",baseName="DEG"){
-
+  gseaGO <- NULL
   geneChangeList = sort(geneChangeList, decreasing = TRUE)
   gseaGo = gseGO(geneChangeList, ont="BP",OrgDb=db,eps=0)
   gseaGo = setReadable(gseaGo, OrgDb =db, keyType="ENTREZID")

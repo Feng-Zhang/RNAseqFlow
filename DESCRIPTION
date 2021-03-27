@@ -12,7 +12,8 @@ Imports:
   enrichplot,
   ggplot2,
   pasilla,
-  stringr
+  stringr,
+  org.Hs.eg.db
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

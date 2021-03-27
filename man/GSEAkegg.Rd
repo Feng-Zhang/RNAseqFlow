@@ -4,12 +4,20 @@
 \alias{GSEAkegg}
 \title{GSEAkegg}
 \usage{
-GSEAkegg(geneChangeList, organism = "hsa", outputDir = ".", baseName = "DEG")
+GSEAkegg(
+  geneChangeList,
+  organism = "hsa",
+  db = org.Hs.eg.db,
+  outputDir = ".",
+  baseName = "DEG"
+)
 }
 \arguments{
 \item{geneChangeList}{a numeric vector of the fold change of genes. It must have name with ENTREZID.}
 
 \item{organism}{supported organism listed in 'http://www.genome.jp/kegg/catalog/org_list.html', such as hsa for human, mmu for mouse.}
+
+\item{db}{the annotation database of specific organism}
 
 \item{outputDir}{the path of output}
 

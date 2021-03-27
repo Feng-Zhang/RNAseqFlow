@@ -4,7 +4,14 @@
 \alias{KEGG}
 \title{GO}
 \usage{
-KEGG(ids, type = "SYMBOL", organism = "hsa", outputDir = ".", baseName = "DEG")
+KEGG(
+  ids,
+  type = "SYMBOL",
+  organism = "hsa",
+  db = org.Hs.eg.db,
+  outputDir = ".",
+  baseName = "DEG"
+)
 }
 \arguments{
 \item{ids}{a character vector of gene id}
@@ -12,6 +19,8 @@ KEGG(ids, type = "SYMBOL", organism = "hsa", outputDir = ".", baseName = "DEG")
 \item{type}{the type of ids which must be one of idType(OrgDb = db) shows}
 
 \item{organism}{supported organism listed in 'http://www.genome.jp/kegg/catalog/org_list.html', such as hsa for human, mmu for mouse.}
+
+\item{db}{the annotation database of organism, such as org.Hs.eg.db for human}
 
 \item{outputDir}{the path of output}
 
