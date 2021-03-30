@@ -10,7 +10,7 @@ KEGG(
   organism = "hsa",
   db = org.Hs.eg.db,
   outputDir = ".",
-  baseName = "DEG"
+  baseName = "Test"
 )
 }
 \arguments{

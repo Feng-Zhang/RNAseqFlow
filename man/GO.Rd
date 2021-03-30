@@ -4,13 +4,7 @@
 \alias{GO}
 \title{GO}
 \usage{
-GO(
-  ids,
-  type = "SYMBOL",
-  db = "org.Hs.eg.db",
-  outputDir = ".",
-  baseName = "DEG"
-)
+GO(ids, type = "SYMBOL", db = org.Hs.eg.db, outputDir = ".", baseName = "Test")
 }
 \arguments{
 \item{ids}{a character vector of gene id}

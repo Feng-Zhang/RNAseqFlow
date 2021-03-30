@@ -17,7 +17,7 @@
 ##' @export
 ##'
 
-KEGG = function(ids,type="SYMBOL",organism="hsa",db=org.Hs.eg.db,outputDir=".",baseName="DEG"){
+KEGG = function(ids,type="SYMBOL",organism="hsa",db=org.Hs.eg.db,outputDir=".",baseName="Test"){
   dgeKegg <- NULL
   if(type!="ENTREZID") ids = bitr(ids, fromType=type, toType="ENTREZID", OrgDb=db)[,2]
   print("#####################  barplot and dot plot for KEGG pathway ################################")

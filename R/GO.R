@@ -14,7 +14,7 @@
 ##' @export
 ##'
 
-GO = function(ids,type="SYMBOL",db="org.Hs.eg.db",outputDir=".",baseName="DEG"){
+GO = function(ids,type="SYMBOL",db=org.Hs.eg.db,outputDir=".",baseName="Test"){
   if(type!="ENTREZID") ids = bitr(ids, fromType=type, toType="ENTREZID", OrgDb=db)[,2]
 
   ego <- enrichGO(gene= ids,#括号内必须加逗号，否则是矩阵
