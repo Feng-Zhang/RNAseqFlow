@@ -14,18 +14,17 @@
 
 GSEAgo = function(geneChangeList,db=org.Hs.eg.db){
   #geneChangeList=geneList
-  gseaGO <- NULL
+  ego <- NULL
   geneChangeList = sort(geneChangeList, decreasing = TRUE)
-  gseaGo = gseGO(geneChangeList, ont="BP",OrgDb=db,eps=0)
-  gseaGo = setReadable(gseaGo, OrgDb =db, keyType="ENTREZID")
-
+  ego = gseGO(geneChangeList, ont="BP",OrgDb=db,eps=0)
+  ego = setReadable(ego, OrgDb =db, keyType="ENTREZID")
   # if(nrow(gseaGo)>1){
   #   write.csv(gseaGo,file=paste(trait,"_gseaGo.csv",sep=""))
   #   png(paste(trait,"_gseaGo",".png",sep=""),height=1000,width=1500,res=150,type="cairo")
   #   print(gseaplot(gseaGo,geneSetID=gseaGo$ID[1],title=paste("BP : ",gseaGo$Description[1],sep="")))
   #   dev.off()
   # }
-  return(gseaGO)
+  return(ego)
 }
 
 
@@ -41,10 +40,10 @@ GSEAgo = function(geneChangeList,db=org.Hs.eg.db){
 ##'
 
 GSEAkegg = function(geneChangeList,organism="hsa",db=org.Hs.eg.db){
-  gseakegg <- NULL
+  ekegg <- NULL
   ## gsea
-  gseaKegg = gseKEGG(geneChangeList,organism=organism,pvalueCutoff = 0.05,eps=0)
-  gseaKegg = setReadable(gseaKegg, OrgDb = db, keyType="ENTREZID")
+  ekegg = gseKEGG(geneChangeList,organism=organism,pvalueCutoff = 0.05,eps=0)
+  ekegg = setReadable(ekegg, OrgDb = db, keyType="ENTREZID")
   #
   # if(nrow(gseaKegg)>1){
   # write.csv(gseaKegg,file=paste(trait,"_gseaKegg.csv",sep=""))
@@ -52,6 +51,6 @@ GSEAkegg = function(geneChangeList,organism="hsa",db=org.Hs.eg.db){
   # print(gseaplot(gseaKegg,geneSetID=gseaKegg$ID[1],title=paste("KEGG : ",gseaKegg$Description[1],sep="")))
   # dev.off()
   # }
-  return(gseakegg)
+  return(ekegg)
 }
 
