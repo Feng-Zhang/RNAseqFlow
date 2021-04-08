@@ -42,6 +42,7 @@ GSEAgo = function(geneChangeList,db=org.Hs.eg.db){
 GSEAkegg = function(geneChangeList,organism="hsa",db=org.Hs.eg.db){
   ekegg <- NULL
   ## gsea
+  geneChangeList = sort(geneChangeList, decreasing = TRUE)
   ekegg = gseKEGG(geneChangeList,organism=organism,pvalueCutoff = 0.05,eps=0)
   ekegg = setReadable(ekegg, OrgDb = db, keyType="ENTREZID")
   #
