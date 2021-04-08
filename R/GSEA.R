@@ -34,6 +34,10 @@ GSEAgo = function(geneChangeList,db=org.Hs.eg.db){
 ##' @param organism supported organism listed in 'http://www.genome.jp/kegg/catalog/org_list.html', such as hsa for human, mmu for mouse.
 ##' @param db the annotation database of specific organism
 ##' @return NULL
+##' \dontrun{
+##' data(geneList, package="DOSE")
+##' ekegg = GSEAkegg(geneList)
+##' }
 ##' @importFrom clusterProfiler gseKEGG setReadable
 ##' @importFrom org.Hs.eg.db org.Hs.eg.db
 ##' @export
