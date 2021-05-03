@@ -7,14 +7,14 @@
 ##' @param baseName the prefix name of outputs would be saved
 ##' @return NULL
 ##' @importFrom stringr str_split_fixed
-##' @importFrom clusterProfiler bitr
+##' @importFrom clusterProfiler bitr enrichGO
 ##' @importFrom utils write.csv
 ##' @importFrom grDevices pdf png dev.off
 ##' @importFrom graphics barplot
 ##' @export
 ##'
 
-GO = function(ids,type="SYMBOL",db="org.Hs.eg.db",outputDir=".",baseName="DEG"){
+GO = function(ids,type="SYMBOL",db=org.Hs.eg.db,outputDir=".",baseName="Test"){
   if(type!="ENTREZID") ids = bitr(ids, fromType=type, toType="ENTREZID", OrgDb=db)[,2]
 
   ego <- enrichGO(gene= ids,#括号内必须加逗号，否则是矩阵
