@@ -4,14 +4,16 @@
 \alias{DESeqObjPCA}
 \title{DESeqObjPCA}
 \usage{
-DESeqObjPCA(dds, groupNum = 1, outputDir = ".")
+DESeqObjPCA(dds, group_name = "condition", outputDir = ".", base_name = NULL)
 }
 \arguments{
 \item{dds}{a matrix with row name}
 
-\item{groupNum}{the number of colData to split case and control group}
+\item{group_name}{the number of colData to split case and control group}
 
 \item{outputDir}{the path of output}
+
+\item{base_name}{NULL or character, the prefix of output. When value is NULL, the figures are not saved.}
 }
 \description{
 This function would plot PCA based on DESeqDataSet object and save as pdf and png format

@@ -4,18 +4,27 @@
 \alias{GO}
 \title{GO}
 \usage{
-GO(ids, type = "SYMBOL", db = org.Hs.eg.db, outputDir = ".", baseName = "Test")
+GO(
+  ids,
+  type = "ENTREZID",
+  db = org.Hs.eg.db,
+  outputDir = ".",
+  base_name = NULL,
+  ...
+)
 }
 \arguments{
-\item{ids}{a character vector of gene id}
+\item{ids}{A character vector of gene id}
 
-\item{type}{the type of ids which must be one of idType(OrgDb = db) shows}
+\item{type}{The type of ids which must be one of idType(OrgDb = db) shows}
 
-\item{db}{the database, such as org.Hs.eg.db , org.Mm.eg.db and so on.}
+\item{db}{The database, such as org.Hs.eg.db , org.Mm.eg.db and so on.}
 
-\item{outputDir}{the path of output}
+\item{outputDir}{The path of output}
 
-\item{baseName}{the prefix name of outputs would be saved}
+\item{base_name}{The prefix name of outputs would be saved}
+
+\item{...}{Aavailable arguments to be passed to enrichGO.}
 }
 \description{
 This function would plot volcano based on DESeqDEGres output and save as pdf and png format

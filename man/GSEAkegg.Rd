@@ -4,7 +4,13 @@
 \alias{GSEAkegg}
 \title{GSEAkegg}
 \usage{
-GSEAkegg(geneChangeList, organism = "hsa", db = org.Hs.eg.db)
+GSEAkegg(
+  geneChangeList,
+  organism = "hsa",
+  db = org.Hs.eg.db,
+  type = "SYMBOL",
+  ...
+)
 }
 \arguments{
 \item{geneChangeList}{a numeric vector of the fold change of genes. It must have name with ENTREZID.}
@@ -12,7 +18,17 @@ GSEAkegg(geneChangeList, organism = "hsa", db = org.Hs.eg.db)
 \item{organism}{supported organism listed in 'http://www.genome.jp/kegg/catalog/org_list.html', such as hsa for human, mmu for mouse.}
 
 \item{db}{the annotation database of specific organism}
+
+\item{type}{the type of ids which must be one of idType(OrgDb = db) shows}
+
+\item{...}{Aavailable arguments to be passed to gseGO}
 }
 \description{
 This function would plot volcano based on DESeqDEGres output and save as pdf and png format
+}
+\examples{
+\dontrun{
+data(geneList, package="DOSE")
+ekegg = GSEAkegg(geneList)
+}
 }
