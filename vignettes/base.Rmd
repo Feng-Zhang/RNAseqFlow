@@ -1,0 +1,79 @@
+---
+title: "Introduction to RNAseqFlow"
+author: "Feng Zhang"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette: default
+  md_document: default
+show_toc: yes
+vignette: >
+  %\VignetteIndexEntry{Introduction to RNAseqFlow} 
+  %\VignetteEngine{knitr::rmarkdown} 
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  echo = TRUE,
+  comment = "#>",
+  fig.path = "../Figs/",
+  warning=FALSE,
+  message = FALSE
+)
+#rmarkdown::render("vignettes/base.Rmd",output_format = "all")
+```
+
+## RNAseq 工作流程
+```{r}
+library(RNAseqFlow)
+input = createCountPhe()
+
+dds = DEseqObj(count_data=input[[1]],col_data=input[[2]],design_names = "condition+type",group_name ="condition",ref_level = "untreated")
+res = DESeqRes(dds,foldChange=0.58,adjPvalue=0.05)
+DESeqObjPCA(dds) # plot PCA
+DESeqResVolcano(res) # plot volcano
+DEsig = row.names(res)[res$regulate!="Normal"]
+```
+
+## 富集分析
+加载一些程序包：
+```{r}
+library(org.Dm.eg.db)
+library(clusterProfiler)
+```
+
+### GO 过度代表检验 (over-representation test)
+```{r}
+goRes = GO(DEsig,type="ENSEMBL",db=org.Dm.eg.db)
+```
+为了方便查看，需要把GO和KEGG的结果保存为文件时，base_name参数可以实现这个功能。
+
+### KEGG 过度代表检验 (over-representation test)
+```{r}
+keggRes = KEGG(DEsig,type="ENSEMBL",organism="dme",db=org.Dm.eg.db);
+head(keggRes)
+```
+值得注意的是，当进行KEGG或gseKEGG时，如果物种是人类，那么基因名为ENTREZID时，对应的keyType是"kegg"或"ncbi-geneid"。当对其它物种进行分析时，ENTREZID对应的是ncbi-geneid。
+
+### GO的GSEA分析
+```{r}
+geneList = res$log2FoldChange
+names(geneList)=row.names(res)
+gseagoRes = GSEAgo(geneList,type="ENSEMBL",db=org.Dm.eg.db)
+head(gseagoRes)
+if(nrow(gseagoRes)>=1){
+  print(gseaplot(gseagoRes,geneSetID=gseagoRes$ID[1],title=paste("BP : ",gseagoRes$Description[1],sep="")))
+}
+
+```
+
+### KEGG的GSEA分析
+```{r}
+gseakeggRes = GSEAkegg(geneList,type="ENSEMBL",organism = "dme",db=org.Dm.eg.db,pvalueCutoff=1)
+
+
+if(nrow(gseakeggRes)>1){
+  print(gseaplot(gseakeggRes,geneSetID=gseakeggRes$ID[1],title=paste("KEGG : ",gseakeggRes$Description[1],sep="")))
+}
+```

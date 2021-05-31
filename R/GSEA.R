@@ -2,6 +2,8 @@
 ##' @description This function would plot volcano based on DESeqDEGres output and save as pdf and png format
 ##' @param geneChangeList a numeric vector of the fold change of genes. It must have name with ENTREZID.
 ##' @param db the database, such as org.Hs.eg.db , org.Mm.eg.db and so on.
+##' @param type  the type of ids which must be one of idType(OrgDb = db) shows
+##' @param ... Aavailable arguments to be passed to gseGO
 ##' @return NULL
 ##' @examples
 ##' \dontrun{
@@ -9,21 +11,18 @@
 ##' ego = GSEAgo(geneList)
 ##' }
 ##' @importFrom clusterProfiler gseGO  setReadable
+##' @importFrom utils modifyList
 ##' @export
 ##'
 
-GSEAgo = function(geneChangeList,db=org.Hs.eg.db){
+GSEAgo = function(geneChangeList,db=org.Hs.eg.db,type="ENTREZID",...){
   #geneChangeList=geneList
   ego <- NULL
   geneChangeList = sort(geneChangeList, decreasing = TRUE)
-  ego = gseGO(geneChangeList, ont="BP",OrgDb=db,eps=0)
-  ego = setReadable(ego, OrgDb =db, keyType="ENTREZID")
-  # if(nrow(gseaGo)>1){
-  #   write.csv(gseaGo,file=paste(trait,"_gseaGo.csv",sep=""))
-  #   png(paste(trait,"_gseaGo",".png",sep=""),height=1000,width=1500,res=150,type="cairo")
-  #   print(gseaplot(gseaGo,geneSetID=gseaGo$ID[1],title=paste("BP : ",gseaGo$Description[1],sep="")))
-  #   dev.off()
-  # }
+  dotargs=list(...)
+  defargs=list(geneChangeList, ont="BP",OrgDb=db,eps=0,keyType = type)
+  ego = do.call("gseGO",modifyList(defargs,dotargs))
+  ego = setReadable(ego, OrgDb = db)
   return(ego)
 }
 
@@ -33,7 +32,10 @@ GSEAgo = function(geneChangeList,db=org.Hs.eg.db){
 ##' @param geneChangeList a numeric vector of the fold change of genes. It must have name with ENTREZID.
 ##' @param organism supported organism listed in 'http://www.genome.jp/kegg/catalog/org_list.html', such as hsa for human, mmu for mouse.
 ##' @param db the annotation database of specific organism
+##' @param type  the type of ids which must be one of idType(OrgDb = db) shows
+##' @param ... Aavailable arguments to be passed to gseGO
 ##' @return NULL
+##' @examples
 ##' \dontrun{
 ##' data(geneList, package="DOSE")
 ##' ekegg = GSEAkegg(geneList)
@@ -43,19 +45,18 @@ GSEAgo = function(geneChangeList,db=org.Hs.eg.db){
 ##' @export
 ##'
 
-GSEAkegg = function(geneChangeList,organism="hsa",db=org.Hs.eg.db){
+GSEAkegg = function(geneChangeList,organism="hsa",db=org.Hs.eg.db,type="SYMBOL",...){
   ekegg <- NULL
-  ## gsea
+  if(type!="ENTREZID") {
+    mappedIds = bitr(names(geneChangeList), fromType=type, toType="ENTREZID", OrgDb=db)
+    geneChangeList = geneChangeList[mappedIds[,type]]
+    names(geneChangeList) = mappedIds[,"ENTREZID"]
+  }
   geneChangeList = sort(geneChangeList, decreasing = TRUE)
-  ekegg = gseKEGG(geneChangeList,organism=organism,pvalueCutoff = 0.05,eps=0)
-  ekegg = setReadable(ekegg, OrgDb = db, keyType="ENTREZID")
-  #
-  # if(nrow(gseaKegg)>1){
-  # write.csv(gseaKegg,file=paste(trait,"_gseaKegg.csv",sep=""))
-  # png(paste(trait,"_gseaKegg",".png",sep=""),height=1000,width=1500,res=150,type="cairo")
-  # print(gseaplot(gseaKegg,geneSetID=gseaKegg$ID[1],title=paste("KEGG : ",gseaKegg$Description[1],sep="")))
-  # dev.off()
-  # }
+  dotargs=list(...)
+  defargs=list(geneChangeList,organism=organism,keyType="ncbi-geneid",pvalueCutoff = 0.05)
+  ekegg = do.call("gseKEGG",modifyList(defargs,dotargs))
+  ekegg = setReadable(ekegg, OrgDb = db,keyType = "ENTREZID")
   return(ekegg)
 }
 

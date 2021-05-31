@@ -4,16 +4,24 @@
 \alias{DEseqObj}
 \title{DEseqObj}
 \usage{
-DEseqObj(countData, colData, groupNum = 1, refLevel = "control")
+DEseqObj(
+  count_data,
+  col_data,
+  design_names = "condition+type",
+  group_name = "condition",
+  ref_level = "control"
+)
 }
 \arguments{
-\item{countData}{a matrix with row name}
+\item{count_data}{a matrix with row name}
 
-\item{colData}{a dataframe include group information}
+\item{col_data}{a dataframe include group information}
 
-\item{groupNum}{the number of colData to split case and control group}
+\item{design_names}{designs with multiple variables, e.g., group + condition, and designs with interactions, e.g., genotype + treatment + genotype:treatment.}
 
-\item{refLevel}{a character which is the reference group}
+\item{group_name}{the name of col_data to split case and control group}
+
+\item{ref_level}{a character which is the reference group}
 }
 \value{
 a list
@@ -24,6 +32,6 @@ This function would generate a object of DESeq2 class
 \examples{
 \dontrun{
 input = createCountPhe()
-dds = DEseqObj(input[[1]],input[[2]],refLevel="untreated")
+dds = DEseqObj(input[[1]],input[[2]],ref_level="untreated")
 }
 }

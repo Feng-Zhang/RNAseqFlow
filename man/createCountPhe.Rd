@@ -2,15 +2,24 @@
 % Please edit documentation in R/createCountPhe.R
 \name{createCountPhe}
 \alias{createCountPhe}
+\alias{createCountPhe.default}
+\alias{createCountPhe.character}
 \title{createCountPhe}
 \usage{
-createCountPhe()
+createCountPhe(GSE = NULL)
+
+\method{createCountPhe}{default}(GSE = NULL)
+
+\method{createCountPhe}{character}(GSE = "GSE24132")
+}
+\arguments{
+\item{GSE}{The number of GSE}
 }
 \value{
 a list
 }
 \description{
-This function would generate a list including a countData and colData as input data for testing
+This function would generate a list including a count_data and col_data as input data for testing
 }
 \examples{
 input = createCountPhe()

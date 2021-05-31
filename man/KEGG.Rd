@@ -2,15 +2,16 @@
 % Please edit documentation in R/KEGG.R
 \name{KEGG}
 \alias{KEGG}
-\title{GO}
+\title{KEGG}
 \usage{
 KEGG(
   ids,
-  type = "SYMBOL",
+  type = "ENTREZID",
   organism = "hsa",
   db = org.Hs.eg.db,
   outputDir = ".",
-  baseName = "Test"
+  base_name = NULL,
+  ...
 )
 }
 \arguments{
@@ -24,7 +25,9 @@ KEGG(
 
 \item{outputDir}{the path of output}
 
-\item{baseName}{the prefix name of outputs would be saved}
+\item{base_name}{the prefix name of outputs would be saved}
+
+\item{...}{Aavailable arguments to be passed to enrichKEGG}
 }
 \description{
 This function would plot volcano based on DESeqDEGres output and save as pdf and png format
