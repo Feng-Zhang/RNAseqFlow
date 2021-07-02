@@ -77,3 +77,8 @@ if(nrow(gseakeggRes)>1){
   print(gseaplot(gseakeggRes,geneSetID=gseakeggRes$ID[1],title=paste("KEGG : ",gseakeggRes$Description[1],sep="")))
 }
 ```
+
+
+
+## Todo
+GSEAGO出错

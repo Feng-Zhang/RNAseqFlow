@@ -4,12 +4,20 @@
 \alias{DESeqObjPCA}
 \title{DESeqObjPCA}
 \usage{
-DESeqObjPCA(dds, group_name = "condition", outputDir = ".", base_name = NULL)
+DESeqObjPCA(
+  dds,
+  group_name = "condition",
+  label = FALSE,
+  outputDir = ".",
+  base_name = NULL
+)
 }
 \arguments{
 \item{dds}{a matrix with row name}
 
 \item{group_name}{the number of colData to split case and control group}
+
+\item{label}{A logical value to plot label of sample}
 
 \item{outputDir}{the path of output}
 
@@ -21,7 +29,7 @@ This function would plot PCA based on DESeqDataSet object and save as pdf and pn
 \examples{
 \dontrun{
 input = createCountPhe()
-dds = DEseqObj(input[[1]],input[[2]],refLevel="untreated")
+dds = DEseqObj(input[[1]],input[[2]],ref_level="untreated")
 DESeqObjPCA(dds)
 }
 }
