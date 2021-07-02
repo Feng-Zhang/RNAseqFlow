@@ -81,4 +81,5 @@ if(nrow(gseakeggRes)>1){
 
 
 ## Todo
+添加batch相关信息，将RNAseqWorkflowDEseq2的内容合并进来。
 GSEAGO出错
