@@ -4,7 +4,13 @@
 \alias{GSEAgo}
 \title{GSEAgo}
 \usage{
-GSEAgo(geneChangeList, db = org.Hs.eg.db, type = "ENTREZID", ...)
+GSEAgo(
+  geneChangeList,
+  db = org.Hs.eg.db,
+  type = "ENTREZID",
+  setReadable = FALSE,
+  ...
+)
 }
 \arguments{
 \item{geneChangeList}{a numeric vector of the fold change of genes. It must have name with ENTREZID.}
@@ -12,6 +18,8 @@ GSEAgo(geneChangeList, db = org.Hs.eg.db, type = "ENTREZID", ...)
 \item{db}{the database, such as org.Hs.eg.db , org.Mm.eg.db and so on.}
 
 \item{type}{the type of ids which must be one of idType(OrgDb = db) shows}
+
+\item{setReadable}{A logical value, mapping geneID to gene Symbol. If geneID is Symbol, the value should be FALSE.}
 
 \item{...}{Aavailable arguments to be passed to gseGO}
 }
