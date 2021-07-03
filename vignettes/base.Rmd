@@ -59,7 +59,11 @@ head(keggRes)
 ### GO的GSEA分析
 ```{r}
 geneList = res$log2FoldChange
+bitr(row.names(res),)
 names(geneList)=row.names(res)
+geneList = sort(geneList, decreasing = TRUE)
+gseGO(geneList,OrgDb = org.Dm.eg.db,keyType ="ENSEMBL")
+
 gseagoRes = GSEAgo(geneList,type="ENSEMBL",db=org.Dm.eg.db)
 head(gseagoRes)
 if(nrow(gseagoRes)>=1){
