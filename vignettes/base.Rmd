@@ -59,12 +59,8 @@ head(keggRes)
 ### GO的GSEA分析
 ```{r}
 geneList = res$log2FoldChange
-bitr(row.names(res),)
 names(geneList)=row.names(res)
-geneList = sort(geneList, decreasing = TRUE)
-gseGO(geneList,OrgDb = org.Dm.eg.db,keyType ="ENSEMBL")
-
-gseagoRes = GSEAgo(geneList,type="ENSEMBL",db=org.Dm.eg.db)
+gseagoRes = GSEAgo(geneList,type="ENSEMBL",db=org.Dm.eg.db,setReadable=TRUE)
 head(gseagoRes)
 if(nrow(gseagoRes)>=1){
   print(gseaplot(gseagoRes,geneSetID=gseagoRes$ID[1],title=paste("BP : ",gseagoRes$Description[1],sep="")))
@@ -75,14 +71,19 @@ if(nrow(gseagoRes)>=1){
 ### KEGG的GSEA分析
 ```{r}
 gseakeggRes = GSEAkegg(geneList,type="ENSEMBL",organism = "dme",db=org.Dm.eg.db,pvalueCutoff=1)
-
-
 if(nrow(gseakeggRes)>1){
   print(gseaplot(gseakeggRes,geneSetID=gseakeggRes$ID[1],title=paste("KEGG : ",gseakeggRes$Description[1],sep="")))
 }
 ```
 
-
+### GSEA using human databale
+```{r}
+data(geneList,package = "DOSE")
+gseagoRes = GSEAgo(geneList,OrgDb = org.Hs.eg.db,setReadable=TRUE)
+print(overallGSEA(gseagoRes,Description,NES))
+gseakeggRes = GSEAkegg(geneList,organism = "hsa",type = "ENTREZID")
+print(overallGSEA(head(gseakeggRes,20),Description,NES))
+```
 
 ## Todo
 添加batch相关信息，将RNAseqWorkflowDEseq2的内容合并进来。

@@ -3,6 +3,7 @@
 ##' @param geneChangeList a numeric vector of the fold change of genes. It must have name with ENTREZID.
 ##' @param db the database, such as org.Hs.eg.db , org.Mm.eg.db and so on.
 ##' @param type  the type of ids which must be one of idType(OrgDb = db) shows
+##' @param setReadable A logical value, mapping geneID to gene Symbol. If geneID is Symbol, the value should be FALSE.
 ##' @param ... Aavailable arguments to be passed to gseGO
 ##' @return NULL
 ##' @examples
@@ -15,14 +16,14 @@
 ##' @export
 ##'
 
-GSEAgo = function(geneChangeList,db=org.Hs.eg.db,type="ENTREZID",...){
+GSEAgo = function(geneChangeList,db=org.Hs.eg.db,type="ENTREZID",setReadable=FALSE,...){
   #geneChangeList=geneList
   ego <- NULL
   geneChangeList = sort(geneChangeList, decreasing = TRUE)
   dotargs=list(...)
-  defargs=list(geneChangeList, ont="BP",OrgDb=db,eps=0,keyType = type)
+  defargs=list(geneList=geneChangeList, ont="BP",OrgDb=db,eps=0,keyType = type)
   ego = do.call("gseGO",modifyList(defargs,dotargs))
-  ego = setReadable(ego, OrgDb = db)
+  if(setReadable) ego = setReadable(ego, OrgDb = db) #names(x) <- value : 'names' attribute [2] must be the same length as the vector [1]
   return(ego)
 }
 
