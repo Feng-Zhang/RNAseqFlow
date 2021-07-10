@@ -6,7 +6,7 @@
 ##' @import pasilla
 ##' @importFrom utils read.csv read.table
 ##' @importFrom stats median
-##' @importFrom GEOmeta GSEtoExpr
+##' @importFrom GEOmeta saveGSE
 ##' @export
 createCountPhe = function(GSE=NULL){
   UseMethod('createCountPhe')
@@ -49,7 +49,7 @@ createCountPhe.default = function(GSE=NULL){
 #' @export
 createCountPhe.character = function(GSE="GSE24132"){
   #library(GEOmeta);data(phe_test)
-  GSEtoExpr(GSE, destdir = "../tmp")
+  saveGSE(GSE, destdir = "../tmp")
   expr_filename = dir("../tmp",pattern = paste0("^",GSE,".*GPL.*-matrix.txt$"))
   count_data = read.table(paste0("../tmp/",expr_filename),header = TRUE,row.names = 1)
   col_data = GEOmeta::phe_test[GEOmeta::phe_test$GSE==GSE,2:3]

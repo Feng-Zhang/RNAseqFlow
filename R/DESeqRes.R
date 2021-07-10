@@ -3,6 +3,7 @@
 ##' @param dds a matrix with row name
 ##' @param foldChange a dataframe include group information
 ##' @param adjPvalue the number of colData to split case and control group
+##' @param ... Aavailable arguments to be passed to results
 ##' @return a dataframe
 ##' @examples
 ##' \dontrun{
@@ -15,8 +16,10 @@
 ##'
 
 
-DESeqRes = function(dds,foldChange=1,adjPvalue=0.05){
-  res <- results(dds)
+DESeqRes = function(dds,foldChange=1,adjPvalue=0.05,...){
+  dotargs=list(...)
+  defargs=list(object=dds)
+  res = do.call("results",modifyList(defargs,dotargs))
   res <- res[order(res$padj), ]
   res$regulate <- "Normal"
   res[res$log2FoldChange< -foldChange & res$padj< adjPvalue & !is.na(res$padj), "regulate"] <- "Down"

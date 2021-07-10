@@ -46,6 +46,7 @@ library(clusterProfiler)
 ### GO 过度代表检验 (over-representation test)
 ```{r}
 goRes = GO(DEsig,type="ENSEMBL",db=org.Dm.eg.db)
+head(goRes)
 ```
 为了方便查看，需要把GO和KEGG的结果保存为文件时，base_name参数可以实现这个功能。
 
@@ -78,13 +79,14 @@ if(nrow(gseakeggRes)>1){
 
 ### GSEA using human databale
 ```{r}
+library(org.Hs.eg.db)
 data(geneList,package = "DOSE")
 gseagoRes = GSEAgo(geneList,OrgDb = org.Hs.eg.db,setReadable=TRUE)
-print(overallGSEA(gseagoRes,Description,NES))
+print(overallGSEA(head(gseagoRes,20),Description,NES))
 gseakeggRes = GSEAkegg(geneList,organism = "hsa",type = "ENTREZID")
 print(overallGSEA(head(gseakeggRes,20),Description,NES))
 ```
 
 ## Todo
 添加batch相关信息，将RNAseqWorkflowDEseq2的内容合并进来。
-GSEAGO出错
+

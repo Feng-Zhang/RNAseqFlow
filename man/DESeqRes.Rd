@@ -4,7 +4,7 @@
 \alias{DESeqRes}
 \title{DESeqRes}
 \usage{
-DESeqRes(dds, foldChange = 1, adjPvalue = 0.05)
+DESeqRes(dds, foldChange = 1, adjPvalue = 0.05, ...)
 }
 \arguments{
 \item{dds}{a matrix with row name}
@@ -12,6 +12,8 @@ DESeqRes(dds, foldChange = 1, adjPvalue = 0.05)
 \item{foldChange}{a dataframe include group information}
 
 \item{adjPvalue}{the number of colData to split case and control group}
+
+\item{...}{Aavailable arguments to be passed to results}
 }
 \value{
 a dataframe
